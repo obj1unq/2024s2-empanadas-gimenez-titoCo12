@@ -2,61 +2,57 @@
 
 object galvan {
 
-    var empasVendidas = 0
-
     var sueldo = 15000
 
-    var totalCobrado = 0
+    var dinero = 0
+
+    method gastar(cuanto) {
+        dinero -= cuanto
+    }
+
+    method deuda() {
+        return dinero.min(0).abs()
+    }
+
+    method dinero() {
+        return dinero.max(0)
+    }
+    
+    method sueldo() {
+        return sueldo
+    }
 
     method sueldo(_sueldo) {
         sueldo = _sueldo
     }
 
-    method sueldo() {
-        return sueldo
-    }
-
-    method totalCobrado(_totalCobrado) {
-        totalCobrado = _totalCobrado
-    }
-
-    method empasVendidas(_empasVendidas) {
-        empasVendidas = _empasVendidas
-    }
+   method cobrar() {
+        dinero += sueldo
+   }
 
 }
 
 object baigorria {
 
-    var sueldo = 0
-
     var empasVendidas = 0
 
     var totalCobrado = 0
 
-    method sueldo() {
-        return sueldo
-    }
-
-    method empasVendidas() {
-        return empasVendidas
-    }
-
-    method empasVendidas(_empasVendidas) {
-        empasVendidas = _empasVendidas
-    }
-
     method vender(cant) {
-        sueldo += 15 * cant
-        empasVendidas += 1
+        empasVendidas += cant
     }
 
-    method totalCobrado(_totalCobrado) {
-        totalCobrado = _totalCobrado
+    method sueldo() {
+        return (empasVendidas * 15)
     }
 
-    method totalCobrado() {
-        return totalCobrado
+     method totalCobrado() {
+        return totalCobrado 
+    } 
+
+    method cobrar() {
+        totalCobrado += self.sueldo()
+        empasVendidas = 0
     }
 
 }
@@ -65,14 +61,12 @@ object gimenez {
 
     var fondo = 300000
 
+    method pagarSueldo(empleado) {
+        fondo -= empleado.sueldo()
+        empleado.cobrar()
+    }
+
     method fondo() {
         return fondo
     }
-
-    method pagarSueldo(empleado) {
-        fondo -= empleado.sueldo()
-        empleado.totalCobrado(empleado.sueldo()) 
-        empleado.empasVendidas(0)
-    }
-
 }
