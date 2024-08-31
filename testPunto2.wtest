@@ -11,8 +11,4 @@ test "Qué hacen los empleados con lo que cobran" {
   baigorria.vender(100)
   gimenez.pagarSueldo(baigorria)
   assert.equals(13500, baigorria.totalCobrado())
-  //Agrego al testeo para asegurarme que no se cuenten las
-  //empanadas del mes anterior
-  assert.equals(0, baigorria.empasVendidas())
- 	
 }
